@@ -1,9 +1,6 @@
-﻿using System.Linq;
-using BepInEx;
-using BepInEx.Bootstrap;
+﻿using BepInEx;
 using CatLaser.Patches;
 using HarmonyLib;
-using UnityEngine;
 
 namespace CatLaser;
 
@@ -17,7 +14,6 @@ public class Plugin : BaseUnityPlugin
     {
         // Plugin startup logic
         Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
-        Debug.Log(BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey("evaisa.lethalthings"));
             
         harmony.PatchAll(typeof(PlayerControllerBPatch));
     }

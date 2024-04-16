@@ -21,7 +21,13 @@ public static class LethalThingsCompatibility
     }
 
     [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-    public static bool IsLauncherButDisabled(GrabbableObject laserSource)
+    public static bool IsLauncher(GrabbableObject laserSource)
+    {
+        return laserSource is RocketLauncher;
+    }
+    
+    [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+    public static bool IsLauncherActive(GrabbableObject laserSource)
     {
         return laserSource is RocketLauncher launcher && !launcher.laserPointer.enabled;
     }

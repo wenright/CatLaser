@@ -23,8 +23,11 @@ public class PlayerControllerBPatch
         
         GrabbableObject laserSource = __instance.currentlyHeldObjectServer;
         if (laserSource == null) return;
-        if (laserSource is FlashlightItem item && (item.flashlightTypeID != 2 || !item.isBeingUsed)) return;
-        if (LethalThingsCompatibility.enabled && LethalThingsCompatibility.IsLauncherButDisabled(laserSource)) return;
+
+        bool isLauncher = LethalThingsCompatibility.enabled && LethalThingsCompatibility.IsLauncher(laserSource);
+        if (!(laserSource is FlashlightItem || isLauncher)) return;
+        if (laserSource is FlashlightItem flashlightItem && (flashlightItem.flashlightTypeID != 2 || !flashlightItem.isBeingUsed)) return;
+        if (isLauncher && LethalThingsCompatibility.IsLauncherActive(laserSource)) return;
         
         Vector3 startPos = __instance.gameplayCamera.transform.position;
         Vector3 forward = __instance.gameplayCamera.transform.forward;
